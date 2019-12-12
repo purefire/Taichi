@@ -10,7 +10,28 @@ A quick and lightweight solution is to use bitmap to do such analysis and store 
 5.	Support group operation and complex formula
 6.	Support HA
 
-As a design result, Taichi may NOT support individual detail other than UV, like you may search if one client do visit on specific date in a specific action, but cannot store/find how long does he spend on that action; 
-Bitmap is based on 32-bit integer, though Taichi does support bigger ids. However it will cost much more if the id is over N*232 , which N is > 16. An alternative solution in Taichi is keep a mapping between the real id and stored id, which total count of stored-id is smaller than N*232 . For example, mobile device is usually 64-bit long, but actually the existing and potential customers may be much smaller than 232 .
+As a design result, Taichi may NOT support individual detail other than UV, like you may search if one client do visit on specific date in a specific action, but cannot store/find how long does he spend on that action;
+Bitmap is based on 32-bit integer, though Taichi does support bigger ids. However it will cost much more if the id is over N*2^31 , which N is > 16. An alternative solution in Taichi is keep a mapping between the real id and stored id, which total count of stored-id is smaller than N*2^31 . For example, mobile device is usually 64-bit or even 128-bit long, but actually the existing and potential customers may be much smaller than 2^31 .
 
-Again, Taichi is targetting small and fast data analyis for UV, PV, retention and other operations based on that. Developer may need common calution if other analysis required like dividual detail.
+Again, Taichi is targetting small and fast data analyis for UV, PV, retention and other mess operations based on that. Developer may need common calution if other analysis required like dividual detail.
+
+# 太极项目
+精确统计DAU、留存，精确计算分析不同业务线用户行为是互联网服务的基本分析方式之一；Bitmap是统计最准确、速度最快、资源占用最小的方式。
+太极项目期望能在bitmap的基础上构架轻量级的数据分析和存储工具。其目标是：
+•功能需求
+  运行在PC机级别的服务器上（比如8core，16G内存和1T磁盘）
+  十万到十亿级别用户
+  可以在小容量的条件下保存三年或以上的数据；保障数据完整性
+  100%精确性
+  支持各种输入和输入，支持表达式计算，支持更多的比较、导入导出操作
+  支持更广泛类型（String)，包括deviceid（imei，mac地址，IDFA，IDFV等）
+  支持接口或者MQ/Kafka输入，支持gPGC等输出
+•非功能需求
+  ns级写入，秒级操作，比如Count (ms)/AND/OR/XOR (s)
+  保持个体数据准确性 (本日ms/非当日冷数据s)
+  支持HA/分布式
+
+虽然当前的bitmap实现都是基于32位的，太极项目支持超过32位整数的数据。但一般地，建议使用百亿级的内的数据；对二十亿以内，即16×32位整数最大值(2^31)以内的数据支持较好。更大的数据会造成计算和存储性能的极大下降。
+更大的数据一般建议使用内置的映射功能。实际上，业务的用户不太可能超过2^31,即21亿。
+
+其他更详细的数据存储分析，比如找到单个用户实际在某一个页面里花费的时长，则需要使用更通用的解决方案。
