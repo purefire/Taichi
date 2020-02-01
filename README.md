@@ -42,18 +42,18 @@ Just execute:
 ### Unzip distribution tarball:
 
 ```shell
- $ tar xvzf truck-web/build/distributions/truck-web-0.0.1-SNAPSHOT.tar -C YOUR_UNZIP_DIR
+ $ tar xvzf web/build/distributions/web-0.0.1-SNAPSHOT.tar -C YOUR_UNZIP_DIR
 ```
 
 ### Start web app in your unzip path:
 
 ```shell
- $ ./bin/truck-web -h
- usage: truck-web
+ $ ./bin/web -h
+ usage: Taichi web
   -c,--config <arg>   config path. (default: config.yml in classpath)
   -h,--help           print usage.
   -p,--port <arg>     listen port. (default: 8888)
- $ ./bin/truck-web -c "classpath:config.prod.yml" -p 8080
+ $ ./bin/web -c "classpath:config.prod.yml" -p 8080
 ```
 ### Special thanks
 Special thanks to @jeffsky who introduce and setup the vert.x framework to this project
@@ -106,10 +106,10 @@ Special thanks to @jeffsky who introduce and setup the vert.x framework to this 
 
 ### 运行:
 ```shell
- $ ./bin/truck-web -h
- usage: truck-web
+ $ ./bin/web -h
+ usage: web
   -c,--config <arg>   config path. (default: config.yml in classpath)
   -h,--help           print usage.
   -p,--port <arg>     listen port. (default: 8888)
- $ ./bin/truck-web -c "classpath:config.prod.yml" -p 8080
+ $ ./bin/web -c "classpath:config.prod.yml" -p 8080
 ```
