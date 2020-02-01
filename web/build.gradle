@@ -1,0 +1,76 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+ dependencies {
+   // ASSUMES GRADLE 2.12 OR HIGHER. Use plugin version 0.7.5 with earlier gradle versions
+   //classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.8'
+ }
+}
+
+plugins {
+    id 'java'
+    id 'application'
+    //id 'com.google.protobuf' version '0.8.8'
+}
+
+mainClassName = 'lv.jing.taichi.web.Bootstrap'
+
+ext {
+    vertxVersion = '3.6.2'
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs "../config"
+        }
+    }
+}
+
+dependencies {
+    implementation project(':spi')
+    implementation project(':core')
+
+    implementation 'commons-cli:commons-cli:1.2'
+    implementation 'org.reflections:reflections:0.9.11'
+
+    implementation "io.vertx:vertx-core:$vertxVersion"
+    implementation "io.vertx:vertx-web:$vertxVersion"
+    implementation "io.vertx:vertx-rx-java2:$vertxVersion"
+    implementation "io.vertx:vertx-web-client:$vertxVersion"
+
+    implementation "com.google.guava:guava:$guavaVersion"
+    implementation "com.google.inject:guice:$guiceVersion"
+    implementation "com.google.protobuf:protobuf-gradle-plugin:0.8.0"
+    implementation "com.googlecode.aviator:aviator:4.1.2"
+    
+    compile "io.vertx:vertx-grpc:3.6.2"
+    compile 'io.vertx:vertx-kafka-client:3.7.0'
+
+    compile group: 'io.netty', name: 'netty-all', version: '4.1.22.Final'
+    compile group: 'com.google.protobuf', name: 'protobuf-java', version: '3.5.1'
+    
+    compile 'io.vertx:vertx-web-graphql:3.7.1'
+    
+    implementation 'org.slf4j:slf4j-log4j12:1.7.25'
+    implementation 'log4j:log4j:1.2.17'
+}
+
+/*
+protobuf {
+ protoc {
+   artifact = 'com.google.protobuf:protoc:3.2.0'
+ }
+ plugins {
+ grpc {
+   artifact = "io.vertx:protoc-gen-grpc-java:1.1.2"
+ }
+}
+ generateProtoTasks {
+   all()*.plugins {
+     grpc
+   }
+ }
+}
+*/

@@ -1,0 +1,76 @@
+ext {
+    slf4jVersion = '1.7.25'
+    guavaVersion = '16.0.1'
+    guiceVersion = '4.0'
+    jacksonVersion = '2.6.5'
+}
+
+allprojects {
+    group = 'lv.jing.taichi'
+    version = '0.0.1-SNAPSHOT'
+    repositories {
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+        mavenCentral()
+    }
+}
+
+buildscript {
+    repositories {
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    sourceCompatibility = 1.8
+
+    dependencies {
+        implementation 'javax.inject:javax.inject:1'
+        implementation "org.slf4j:slf4j-api:$slf4jVersion"
+
+        implementation 'com.google.code.findbugs:jsr305:3.0.2'
+
+        implementation 'org.apache.commons:commons-lang3:3.8.1'
+        implementation 'commons-io:commons-io:2.6'
+        implementation 'commons-collections:commons-collections:3.2.2'
+        implementation "com.google.guava:guava:$guavaVersion"
+        implementation 'io.reactivex.rxjava2:rxjava:2.2.4'
+        implementation "org.roaringbitmap:RoaringBitmap:0.7.38"
+        implementation 'org.mongodb:mongodb-driver:3.6.3'
+        implementation 'io.vertx:vertx-amqp-bridge:3.6.2'
+        implementation 'org.apache.activemq:activemq-client:5.15.0'
+        implementation 'org.apache.activemq:activemq-broker:5.15.0'
+    
+        implementation 'joda-time:joda-time:2.9.7'
+        compile 'io.vertx:vertx-hazelcast:3.5.0'
+
+        implementation("com.fasterxml.jackson.core:jackson-core:${jacksonVersion}") {
+            force = true
+        }
+        implementation("com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}") {
+            force = true
+        }
+        implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${jacksonVersion}") {
+            force = true
+        }
+        implementation("com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}") {
+            force = true
+        }
+        
+        compile 'io.vertx:vertx-web-graphql:3.7.1'
+
+        testImplementation 'org.testng:testng:6.14.3'
+        testImplementation "org.slf4j:slf4j-simple:$slf4jVersion"
+    }
+
+    test {
+        useTestNG()
+    }
+}
+

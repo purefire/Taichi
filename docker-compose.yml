@@ -1,0 +1,28 @@
+---
+version: '3'
+services:
+  mongo:
+    image: 'mongo'
+    ports:
+      - '27017:27017'
+    volumes:
+      - './tmp/mongo:/data/db'
+  redis:
+    image: 'redis'
+    ports:
+      - '6379:6379'
+    volumes:
+      - './tmp/redis:/data/db'
+    command: ['redis-server', '--appendonly', 'yes']
+  kafka:
+    image: 'kafka'
+    ports:
+      - '9092:9092'
+    volumes:
+      - './tmp/kafka:/data/db'
+  activemq:
+    image: 'webcenter/activemq'
+    ports:
+      - '61617:61617'
+    volumes:
+      - './tmp/kafka:/data/db'

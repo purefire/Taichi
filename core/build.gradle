@@ -1,0 +1,43 @@
+sourceSets {
+    test {
+        resources {
+            srcDirs "../config"
+        }
+    }
+}
+
+ext {
+    vertxVersion = '3.6.2'
+}
+
+dependencies {
+    implementation project(':spi')
+
+    implementation 'org.mongodb:mongodb-driver:3.6.3'
+    implementation 'org.influxdb:influxdb-java:2.12'
+    implementation 'redis.clients:jedis:2.10.1'
+    implementation "io.vertx:vertx-core:$vertxVersion"
+    implementation "io.vertx:vertx-web:$vertxVersion"
+    implementation "io.vertx:vertx-rx-java2:$vertxVersion"
+    implementation "com.google.inject:guice:$guiceVersion"
+
+    implementation "org.roaringbitmap:RoaringBitmap:0.7.38"
+
+    annotationProcessor 'org.projectlombok:lombok:1.18.2'
+    compileOnly 'org.projectlombok:lombok:1.18.2'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.2'
+    testCompileOnly 'org.projectlombok:lombok:1.18.2'
+    
+    implementation "io.vertx:vertx-amqp-bridge:3.6.2"
+    implementation 'org.apache.activemq:activemq-client:5.15.0'
+    implementation 'org.apache.activemq:activemq-broker:5.15.0'
+    implementation "com.googlecode.aviator:aviator:4.1.2"
+    
+    compile 'io.vertx:vertx-kafka-client:3.7.0'
+    
+    compile group: 'org.apache.hadoop', name: 'hadoop-common', version:'2.7.3'
+    compile group: 'org.apache.hadoop', name: 'hadoop-hdfs', version: '2.7.3'
+    compile group: 'org.apache.hadoop', name: 'hadoop-yarn-common', version: '2.7.3'
+    compile group: 'org.apache.hadoop', name: 'hadoop-client', version: '2.7.3'
+    
+}

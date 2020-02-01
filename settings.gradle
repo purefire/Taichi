@@ -1,0 +1,6 @@
+rootProject.name = 'taichi'
+include 'spi'
+include 'web'
+include 'core'
+
+

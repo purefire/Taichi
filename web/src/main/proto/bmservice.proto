@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_multiple_files = false;
+option java_package = "lv.jing.taichi.web";
+option java_outer_classname = "RPCBitmap";
+
+package RPCBitmap;
+
+service PostBitmap{
+    rpc getBitmap(BitmapRequest) returns (BitmapReply) {} 
+}
+// The request message containing the user's name.
+message BitmapRequest {
+  string bizname = 1;
+  string date = 2;
+}
+
+// The response message containing the greetings
+message BitmapReply {
+    int32 highbits = 1;
+    map<int32, bytes> bitmaps = 2;
+}

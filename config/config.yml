@@ -1,0 +1,29 @@
+---
+mongo:
+  hosts:
+    - 127.0.0.1
+  port: 27017
+  database: truck
+
+redis:
+  hosts:
+    - '127.0.0.1:6379'
+  maxTotal: 128
+  maxIdle: 128
+  testOnBorrow: false
+  blockWhenExhausted: true
+
+amq:
+   url: 'failover:(tcp://localhost:61617)'
+   username: 'admin'
+   password: 'admin'
+   queue: 'bitmap.queue'
+   
+kafka:
+  server: 'localhost:9092'
+  keyDeserializer: 'io.vertx.kafka.client.serialization.JsonObjectDeserializer'
+  valueDeserializer: 'io.vertx.kafka.client.serialization.JsonObjectDeserializer'
+  groupId: 'bitmap_input_test'
+  offsetReset: 'earliest'
+  autoCommint: 'true'
+  topic: 'tk_bitmap'
